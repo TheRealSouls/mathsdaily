@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title | default("DailyMaths") }}</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://kit.fontawesome.com/d24d18c78a.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nata+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <title>{{ title | default("DailyMaths.ie") }}</title>
 </head>
 <body>
+    <header>
+        <h1 id="title">Daily<span>Maths</span>.ie</h1>
+        <nav id="header-nav">
+            <ul>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">Home</a></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+    </header>
     {% block content %}
-
     {% endblock %}
 
-    <footer></footer>
+    <footer>
+        <p>developed with ❤️ by TheRealSouls | <a href="https://github.com/TheRealSouls"><i class="fa-brands fa-github fa-2x"></i></a></p>
+        <nav id="footer-nav">
+            <ul>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">Home</a></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script src="../static/script.js"></script>
 </body>
 </html>
