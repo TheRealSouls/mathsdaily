@@ -92,6 +92,44 @@ header {
     box-shadow: 0 0 10px crimson, 0 0 20px crimson inset;
 }
 
+.ham-button {
+    display: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Ham menu */
+
+#ham-menu {
+    display: flex;
+    z-index: 1000;
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    top: 0;
+    right: -250px; /* Change this */
+    background-color: var(--black);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+#ham-menu ul {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#ham-menu ul li a {
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+#ham-menu ul li a:hover {
+    color: var(--red);
+}
+
 /* Footer */
 
 footer {
@@ -130,4 +168,15 @@ footer p {
 
 #footer-nav a:hover {
     color: var(--red-2);
+}
+
+/* Media queries */
+
+@media only screen and (max-width: 768px) {
+    #header-nav ul {
+        display: none;
+    }
+    .ham-button {
+        display: block;
+    }
 }

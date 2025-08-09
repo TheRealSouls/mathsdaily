@@ -1,4 +1,15 @@
+const sidebar = document.getElementById("ham-menu");
+
+const showSideBar = () => {
+    sidebar.style.transform = 'translateX(-250px)';
+}
+
+const hideSideBar = () => {
+    sidebar.style.transform = 'translateX(250px)';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    /* Math symbol */
     const symbols = ['∫', '∑', '∆', 'π', '∞', '√', '∂', 'α', 'β', 'γ', '±', '≠', '≤', '≥'];
     const container = document.getElementById("mathSymbols");
 
@@ -18,7 +29,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 25000);
         }, 2000);
     };
-
-    // 🟢 This is the missing piece
     createMathSymbols();
 });

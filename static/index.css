@@ -24,6 +24,12 @@
     margin: 0 10%;
 }
 
+#hero-content p {
+    line-height: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 #hero-content * {
     margin-bottom: 1rem;
 }
