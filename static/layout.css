@@ -17,6 +17,8 @@ html {
 body {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 100%);
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 :root {
@@ -136,6 +138,7 @@ footer {
     background-color: var(--black);
     border-top: 1px solid #404040;
     padding-top: 1.5rem;
+    width: 100%;
 }
 
 footer p {
