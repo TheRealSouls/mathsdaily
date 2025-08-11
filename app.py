@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request
 from flask_session import Session
 
 app = Flask(__name__)
@@ -15,4 +15,16 @@ def index():
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", title="DailyMaths.ie - Contact")
+
+@app.route("/leaderboard")
+def leaderboard():
+    # TODO
+    return render_template("leaderboard.html", title="DailyMaths.ie - Leaderboard") 
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("")

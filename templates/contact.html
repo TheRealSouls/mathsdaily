@@ -1,10 +1,25 @@
 {% extends "layout.html" %}
 
 {% block styles %}
-    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/contact.css">
 {% endblock %}
 
 {% block content %}
-    <h1>Lorem ipsum</h1>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur libero quaerat illo labore perspiciatis at iure voluptatem aperiam, velit deserunt reiciendis tempore ea vero quibusdam impedit. Impedit assumenda maiores porro!</p>
+
+    <div id="contact-header">
+        <h1 class="title">Contact us</h1>
+        <p class="desc">If you have feedback, ideas, or just want a quick chat, please don't hesitate to contact me! <span class="brackets">(TheRealSouls)</span></p>
+    </div>
+    
+    <div class="form-wrapper">
+        <form
+            action="https://formspree.io/f/mjkokqqz"
+            method="POST" id="contact-form">
+        
+            <input type="name" name="name" placeholder="name" autocomplete="off" required>
+            <input type="email" name="email" placeholder="email" autocomplete="off" required>
+            <textarea name="message" placeholder="message" rows="10" cols="50" autocomplete="off" required></textarea>
+            <button type="submit" class="cta-button">Send Message</button> 
+        </form> 
+    </div>
 {% endblock %}

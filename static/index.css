@@ -34,24 +34,6 @@
     margin-bottom: 1rem;
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: linear-gradient(45deg, #dc3545, #b02a37);
-    border-radius: 1rem;
-    font-weight: bold;
-    font-size: 1.1rem;
-    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
-    transition: all 0.3s ease;
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
-}
-
 .math-symbols {
     position: absolute;
     width: 100%;
