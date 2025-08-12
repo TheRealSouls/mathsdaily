@@ -27,4 +27,4 @@ def login():
     if request.method == "POST":
         pass
     else:
-        return render_template("")
+        return render_template("login.html", title="DailyMaths.ie - Login")

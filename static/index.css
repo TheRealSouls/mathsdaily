@@ -66,6 +66,17 @@
     }
 }
 
+/* Aside */
+
+aside {
+    display: flex;
+    background-color: darkred;
+    justify-content: space-around;
+    padding: 2.5rem;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+}
+
 /* Features section */
 
 #features-grid {
