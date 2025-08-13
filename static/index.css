@@ -72,9 +72,17 @@ aside {
     display: flex;
     background-color: darkred;
     justify-content: space-around;
+    align-items: center;
     padding: 2.5rem;
     font-size: 1.1rem;
     margin: 1rem 0;
+}
+
+aside span {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 15%;
 }
 
 /* Features section */
