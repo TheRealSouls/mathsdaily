@@ -204,8 +204,7 @@ textarea {
 }
 
 .cta-button-2 {
-    padding: 1rem;
-    background: linear-gradient(45deg, #dc3545, #b02a37);
+    padding: 1rem 3rem;
     border: none;
     border-radius: 1rem;
     color: var(--white);
@@ -240,6 +239,28 @@ textarea {
 
 .cta-button-2:active {
     transform: translateY(0);
+}
+
+.slide-link {
+    font-weight: 600;
+    color: var(--red-2);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.slide-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #dc3545;
+    transition: width 0.3s ease;
+}
+
+.slide-link:hover::after {
+    width: 100%;
 }
 
 /* Media queries */
