@@ -28,3 +28,4 @@ def login():
         pass
     else:
         return render_template("login.html", title="DailyMaths.ie - Login")
+
