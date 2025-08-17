@@ -178,3 +178,13 @@
 .register-text {
     opacity: 0.9;
 }
+
+/* Errors and flashes */
+
+.error {
+    background-color: var(--red-2);
+}
+
+.success {
+    background-color: lightgreen;
+}

@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="password" name="confirm-password" id="password" placeholder="Confirm Password" class="form-input" required>
+                    <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" class="form-input" required>
                     <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
                 </div>
 
@@ -52,6 +52,15 @@
                     <p class="error-msg">{{ message }}</p>
                 {% endfor %}
             {% endif %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="error-container">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
 
             <div class="divider">
                 <span>or</span>
