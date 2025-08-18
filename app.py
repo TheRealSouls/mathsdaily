@@ -2,10 +2,12 @@ from cs50 import SQL
 from flask import Flask, render_template, session, request, redirect, make_response, flash, get_flashed_messages
 from flask_session import Session
 from functools import wraps
+import os
 import re
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-for-local")
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -44,11 +46,40 @@ def leaderboard():
 @app.route("/login", methods=["GET", "POST"])
 @nocache
 def login():
+
+    session.clear()
+
     if request.method == "POST":
-        # TODO
-        pass
-    else:
-        return render_template("login.html", title="DailyMaths.ie - Login")
+        username_email = request.form.get("username-email")
+        password = request.form.get("password")
+
+        errors = []
+        EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+
+        if not username_email:
+            errors.append(("⚠️ Username or email is required", "error"))
+        
+        if not password:
+            errors.append(("⚠️ Password is required", "error"))
+
+        rows = db.execute(
+            "SELECT * FROM users WHERE username = ? OR email = ?", username_email, username_email
+        )
+
+        # TODO: remember me functionality
+
+        if len(rows) != 1 or not check_password_hash(
+            rows[0]["password_hash"], password
+        ):
+            errors.append("⚠️ Invalid username and/or password", "error")
+        
+        if errors:
+            return render_template("login.html", title="DailyMaths.ie - Login", errors=errors)
+        
+        return redirect("/homepage")
+    
+    # GET request
+    return render_template("login.html", title="DailyMaths.ie - Login", errors=[])
 
 @app.route("/register", methods=["GET", "POST"])
 @nocache
@@ -59,38 +90,50 @@ def register():
         password = request.form.get("password")
         confirm_password = request.form.get("confirm-password")
 
-        errors = {}
+        errors = []
         EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
 
         if not username:
-            flash("Username is required", "error")
+            errors.append(("⚠️ Username is required", "error"))
+        
         if not password:
-            flash("Password is required", "error")
+            errors.append(("⚠️ Password is required", "error"))
+        
         if not email:
-            flash("Email is required", "error")
+            errors.append(("⚠️ Email is required", "error"))
+        
         elif EMAIL_REGEX.match(email) is None:
-            flash("Invalid email format", "error")
+            errors.append(("⚠️ Invalid email format", "error"))
+        
         if password != confirm_password:
-            flash("Passwords do not match", "error")
+            errors.append(("⚠️ Passwords do not match", "error"))
 
         # check if username or email exists
-        user = db.execute("SELECT * FROM users WHERE username = ?", username)
-        if user:
-            flash("Username already taken", "error")
+        if username and db.execute("SELECT * FROM users WHERE username = ?", username):
+            errors.append(("⚠️ Username already taken", "error"))
         
-        user_email = db.execute("SELECT * FROM users WHERE email = ?", email)
-        if user_email:
-            flash("Email already registered", "error")
+        if email and db.execute("SELECT * FROM users WHERE email = ?", email):
+            errors.append(("⚠️ Email already registered", "error"))
         
-        # If any errors, redisplay form.
-        if get_flashed_messages(category_filter=["error"]):
-            return render_template("register.html", errors=errors, title="DailyMaths.ie - Register")
+        if errors:
+            return render_template("register.html", title="DailyMaths.ie - Register", errors=errors)
+        
+        try:
+            db.execute(
+                "INSERT INTO users (username, password_hash, score, email) VALUES (?, ?, ?, ?)",
+                username, generate_password_hash(password), 0, email
+            )
+        except Exception as exc:
+            # catch integrity / other DB errors and show a user-friendly message
+            errors.append(("⚠️ Account could not be created due to an unknown error. Please report this to the staff!", "error"))
+            # optionally log the exception server-side
+            app.logger.exception("Register DB error")
+            return render_template("register.html", title="DailyMaths.ie - Register", errors=errors)
 
-        db.execute(
-            "INSERT INTO users (username, password_hash, score, email) VALUES (?, ?, ?, ?)",
-              username, generate_password_hash(password), 0, email
-        )
-        return redirect("/homepage")
+
+        # TODO: remember me functionality
+        flash("✅ Account created! Please log in.", "success")
+        return redirect("/login")
 
     # GET request
-    return render_template("register.html", title="DailyMaths.ie - Register", errors={})
+    return render_template("register.html", title="DailyMaths.ie - Register")

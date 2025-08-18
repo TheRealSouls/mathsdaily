@@ -181,10 +181,23 @@
 
 /* Errors and flashes */
 
+.flash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.flash-container * {
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
 .error {
     background-color: var(--red-2);
 }
 
 .success {
-    background-color: lightgreen;
+    background-color: green;
 }
