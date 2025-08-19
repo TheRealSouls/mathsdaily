@@ -54,7 +54,6 @@ def login():
         password = request.form.get("password")
 
         errors = []
-        EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
 
         if not username_email:
             errors.append(("⚠️ Username or email is required", "error"))
@@ -62,19 +61,22 @@ def login():
         if not password:
             errors.append(("⚠️ Password is required", "error"))
 
-        rows = db.execute(
-            "SELECT * FROM users WHERE username = ? OR email = ?", username_email, username_email
-        )
+        if not errors:
+            rows = db.execute(
+                "SELECT * FROM users WHERE username = ? OR email = ?", username_email, username_email
+            )
 
-        # TODO: remember me functionality
+            # TODO: remember me functionality
 
-        if len(rows) != 1 or not check_password_hash(
-            rows[0]["password_hash"], password
-        ):
-            errors.append("⚠️ Invalid username and/or password", "error")
+            if len(rows) != 1 or not check_password_hash(
+                rows[0]["password_hash"], password
+            ):
+                errors.append(("⚠️ Invalid username and/or password", "error"))
         
         if errors:
             return render_template("login.html", title="DailyMaths.ie - Login", errors=errors)
+
+        session["user_id"] = rows[0]["id"]
         
         return redirect("/homepage")
     

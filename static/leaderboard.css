@@ -1,0 +1,112 @@
+/* Titles and all */
+
+#contact-header {
+    margin: 2rem auto;
+}
+
+.title {
+    color: var(--red-2);
+    font-size: 3rem;
+}
+
+/* The actual table */
+
+.leaderboard-table {
+    background: #2d2d2d;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid #404040;
+    animation: fadeInUp 1s ease-out 0.6s both;
+    max-width: 1000px;
+    margin: 1rem auto;
+}
+
+.table-header {
+    background: var(--black);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #404040;
+}
+
+.table-content {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.table-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.table-content::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+.table-content::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border-radius: 3px;
+}
+
+.leaderboard-row {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--grey);
+    transition: all 0.3s ease;
+    animation: slideInRight 0.6s ease-out both;
+}
+
+.leaderboard-row:hover {
+    background: rgba(220, 53, 69, 0.05);
+    transform: translateX(5px);
+}
+
+.leaderboard-row:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-row:nth-child(1) { animation-delay: 0.1s; }
+.leaderboard-row:nth-child(2) { animation-delay: 0.2s; }
+.leaderboard-row:nth-child(3) { animation-delay: 0.3s; }
+.leaderboard-row:nth-child(4) { animation-delay: 0.4s; }
+.leaderboard-row:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.rank-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--red);
+    width: 50px;
+    text-align: center;
+}
+
+.user-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+    margin-left: 2rem;
+}
+
+.user-stats * {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.user-stats p {
+    opacity: 0.8;
+}
+
+.user-stats span {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
