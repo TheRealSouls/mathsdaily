@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/layout.css">
+    {% block styles %}{% endblock %}
+    <script src="https://kit.fontawesome.com/d24d18c78a.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nata+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <title>{{ title | default("DailyMaths.ie") }}</title>
+</head>
+<body>
+    <header>
+        <h1 id="title">Daily<span>Maths</span>.ie</h1>
+        <nav id="header-nav">
+            <button class="ham-button" onclick="showSideBar()"><i class="fa-solid fa-bars"></i></button>
+            <ul>
+                <li><a href="/" target="_blank" rel="noopener noreferrer">Home</a></li>
+                <li><a href="/contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                <li><a href="/leaderboard" target="_blank" rel="noopener noreferrer">Leaderboard</a></li>
+                <li><a href="/login" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+        <!-- Where you left off-->
+        <nav id="ham-menu">
+            <ul>
+                <li onclick="hideSideBar()" id="x"><i class="fa-solid fa-x fa-1x"></i></li>
+                <li><a href="/" target="_blank" rel="noopener noreferrer">Home</a></li>
+                <li><a href="/contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                <li><a href="/leadeboard" target="_blank" rel="noopener noreferrer">Leaderboard</a></li>
+                <li><a href="/login" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <p>Developed with ❤️ by TheRealSouls | <a href="https://github.com/TheRealSouls"><i class="fa-brands fa-github fa-2x"></i></a></p>
+        <p class="copyright">© 2025 DailyMaths - Giving you even more problems to deal with!</p>
+        <nav id="footer-nav">
+            <ul>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">Home</a></li>
+                <li><a href="/contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                <li><a href="/leaderboard" target="_blank" rel="noopener noreferrer">Leaderboard</a></li>
+                <li><a href="/login" target="_blank" rel="noopener noreferrer">Login</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

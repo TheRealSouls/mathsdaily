@@ -2,11 +2,53 @@
 
 #contact-header {
     margin: 2rem auto;
+    text-align: center;
 }
 
 .title {
     color: var(--red-2);
     font-size: 3rem;
+}
+
+.desc {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Buttons */
+
+#limit-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* From CTA buttons in layout.css */
+
+#limit-buttons span {
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(45deg, #dc3545, #b02a37);
+    border-radius: 1rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-top: 1rem;
+    border: none;
+    width: 10rem;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
+    cursor: pointer;
 }
 
 /* The actual table */
@@ -17,7 +59,7 @@
     overflow: hidden;
     border: 1px solid #404040;
     animation: fadeInUp 1s ease-out 0.6s both;
-    max-width: 1000px;
+    max-width: 600px;
     margin: 1rem auto;
 }
 
@@ -28,7 +70,7 @@
 }
 
 .table-content {
-    max-height: 600px;
+    max-height: 800px;
     overflow-y: auto;
 }
 

@@ -28,20 +28,38 @@ def nocache(view):
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html", title="DailyMaths.ie - Contact")
+    return render_template("dashboard/contact.html", title="DailyMaths.ie - Contact")
 
 @app.route("/homepage")
 def homepage():
-    return render_template("homepage.html")
+    # TODO: Finish
+    if session.get("user_id") is None:
+        session.clear()
+        return redirect("/")
+    
+    rows = db.execute("SELECT username FROM users WHERE user_id = ?", session["user_id"])
+    username = rows[0]["username"] if rows else None
+
+    return render_template("auth/homepage.html", username=username)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("dashboard/index.html")
+
+@app.route("/api/leaderboard")
+def leaderboard_api():
+    limit = request.args.get("limit", 10, type=int)
+
+    rows = db.execute(
+        "SELECT username, score, solved, accuracy FROM users ORDER BY score DESC LIMIT ?",
+        limit,
+    )
+
+    return rows
 
 @app.route("/leaderboard")
 def leaderboard():
-    # TODO
-    return render_template("leaderboard.html", title="DailyMaths.ie - Leaderboard") 
+    return render_template("dashboard/leaderboard.html", title="DailyMaths.ie - Leaderboard") 
 
 @app.route("/login", methods=["GET", "POST"])
 @nocache
@@ -74,14 +92,14 @@ def login():
                 errors.append(("⚠️ Invalid username and/or password", "error"))
         
         if errors:
-            return render_template("login.html", title="DailyMaths.ie - Login", errors=errors)
+            return render_template("dashboard/login.html", title="DailyMaths.ie - Login", errors=errors)
 
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = rows[0]["user_id"]
         
         return redirect("/homepage")
     
     # GET request
-    return render_template("login.html", title="DailyMaths.ie - Login", errors=[])
+    return render_template("dashboard/login.html", title="DailyMaths.ie - Login", errors=[])
 
 @app.route("/register", methods=["GET", "POST"])
 @nocache
@@ -118,7 +136,7 @@ def register():
             errors.append(("⚠️ Email already registered", "error"))
         
         if errors:
-            return render_template("register.html", title="DailyMaths.ie - Register", errors=errors)
+            return render_template("dashboard/register.html", title="DailyMaths.ie - Register", errors=errors)
         
         try:
             db.execute(
@@ -134,8 +152,9 @@ def register():
 
 
         # TODO: remember me functionality
+
         flash("✅ Account created! Please log in.", "success")
         return redirect("/login")
 
     # GET request
-    return render_template("register.html", title="DailyMaths.ie - Register")
+    return render_template("dashboard/register.html", title="DailyMaths.ie - Register")
