@@ -44,6 +44,8 @@ def homepage():
 
 @app.route("/")
 def index():
+    if session.get("user_id"):
+        return redirect("/homepage")
     return render_template("dashboard/index.html")
 
 @app.route("/api/leaderboard")
