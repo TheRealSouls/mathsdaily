@@ -149,7 +149,7 @@ aside img {
     gap: 2rem;
 }
 
-/* Media queries: to fix later */
+/* TODO: mediaqueries and responsivity */
 
 @media only screen and (max-width: 768px) {
     #footer-nav {

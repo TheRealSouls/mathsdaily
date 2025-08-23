@@ -27,6 +27,9 @@ body {
     --red: #D43343;
     --red-2: #dc3545;
     --white: #FFF;
+    --light-grey: #e0e0e0;
+    --easy: #28a745;
+    --medium: #ffc107;
 }
 
 @media (prefers-reduced-motion: no-preference) {

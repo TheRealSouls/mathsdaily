@@ -1,0 +1,35 @@
+{% extends "layouts/auth_layout.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../static/css/leaderboard.css">
+{% endblock %}
+
+{% block content %}
+
+    <!-- TODO: add math symbols-->
+
+    <div id="contact-header">
+        <h1 class="title">Leaderboard</h1>
+        <p class="desc">Top performers in mathematical excellence</p>
+    </div>
+
+    <div id="limit-buttons">
+        <span>
+            <button>Top 5</button>
+            <button>Top 10</button>
+        </span>
+        <span>
+            <button>Top 50</button>
+            <button>Top 100</button>
+        </span>
+    </div>
+
+    <div class="leaderboard-table">
+        <div class="table-header">
+            <h1>Rankings</h1>
+        </div>
+        <div class="table-content" id="table-content">
+        </div>
+    </div>
+    <script src="../static/js/leaderboard.js"></script>
+{% endblock %}

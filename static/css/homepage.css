@@ -1,0 +1,259 @@
+/* Welcome and quote */
+
+#greeting {
+    text-align: center;
+    margin-top: 3rem;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+#hello {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.ready {
+    color: var(--red-2);
+}
+
+#quote {
+    background: rgba(220, 53, 69, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    border-radius: 2rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+    animation: fadeInUp 1s ease-out 0.3s both;
+    margin: 2rem 10%;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quote {
+    background: rgba(220, 53, 69, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.icon {
+    font-size: 3rem;
+}
+
+.quote-text {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--light-grey);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Problem section */
+
+#dashboard-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.challenge-section {
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--light-grey);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.challenge-cards {
+    display: grid;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.challenge-card {
+    background: #2d2d2d;
+    border-radius: 2rem;
+    padding: 2rem;
+    border: 1px solid var(--grey);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.challenge-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.challenge-card.easy::before {
+    background: linear-gradient(45deg, var(--easy), #20c997);
+    opacity: 1;
+}
+
+.challenge-card.medium::before {
+    background: linear-gradient(45deg, var(--medium), #fd7e14);
+    opacity: 1;
+}
+
+.challenge-card.hard::before {
+    background: linear-gradient(45deg, var(--red), #e74c3c);
+    opacity: 1;
+}
+
+.challenge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.challenge-card.easy:hover {
+    border: 1px solid var(--easy);
+}
+
+.challenge-card.medium:hover {
+    border: 1px solid var(--medium);
+}
+
+.challenge-card.hard:hover {
+    border: 1px solid var(--red);
+}
+
+.challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.difficulty-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.difficulty-badge.easy {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid rgba(40, 167, 69, 0.4);
+    color: var(--easy);
+}
+
+.difficulty-badge.medium {
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    color: var(--medium);
+ }
+
+.difficulty-badge.hard {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: var(--red);
+}
+
+.points-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--red);
+}
+
+.challenge-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--light-grey);
+    margin-bottom: 0.5rem;
+}
+
+.challenge-description {
+    color: var(--light-grey);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.challenge-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.time-estimate {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Stats */
+
+.stats-card {
+    background: #2d2d2d;
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid #404040;
+    margin: 0 10% 1.5rem 10%;
+    animation: fadeInUp 0.4s ease-out both;
+}
+
+.stats-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--light-grey);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #404040;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    color: var(--light-grey);
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--red);
+}
+

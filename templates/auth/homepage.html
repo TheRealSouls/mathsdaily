@@ -1,9 +1,98 @@
 {% extends "layouts/auth_layout.html" %}
 
 {% block styles %}
-    
+    <link rel="stylesheet" href="../../static/css/homepage.css">
 {% endblock %}
 
 {% block content %}
-    <h1>Hello, {{ username }}!</h1>
+
+    <!-- TODO: Add math animations-->
+    <!-- TODO: Accessibility, ARIA on all websites.-->
+
+    <div id="greeting">
+        <h1 id="hello">Hello, {{ data[0]["username"] }}!</h1>
+        <h1 class="ready">Ready for today's challenge?</h1>
+    </div>
+    <div id="quote">
+        <div class="icon">🤑</div>
+        <div class="quote-text">"Gamble all day long."</div>
+        <div class="quote-person">—Maciej Kowal</div>
+    </div>
+    
+    <div id="dashboard-grid">
+        <div class="challenge-section">
+            <h2 class="section-title">🎯 Today's Challenges</h2>
+
+            <div class="challenge-cards">
+
+                <!-- Challenge 1 -->
+                 <a href="/challenge/1" data-difficulty="easy">
+                    <div class="challenge-card easy" data-difficulty="easy">
+                        <div class="challenge-header">
+                            <div class="difficulty-badge easy">🟢 Easy</div>
+                            <div class="points-value">+10 pts</div>
+                        </div>
+                        <div class="challenge-title">Basic Algebra</div>
+                        <div class="challenge-description">
+                        Solve linear equations and practice fundamental algebraic concepts.
+                        </div>
+                        <div class="challenge-meta">
+                        <div class="time-estimate">⏱️ ~5 minutes</div>
+                    </div>
+                </div>
+                 </a>
+
+                <!-- Challenge 2 -->
+                 <a href="/challenge/2" data-difficulty="medium">
+                    <div class="challenge-card medium" data-difficulty="medium">
+                        <div class="challenge-header">
+                            <div class="difficulty-badge medium">🟡 Medium</div>
+                            <div class="points-value">+25 pts</div>
+                        </div>
+                        <div class="challenge-title">Quadratic Functions</div>
+                        <div class="challenge-description">
+                        Explore parabolas, vertex forms, and real-world applications. Challenge your analytical thinking skills.
+                        </div>
+                        <div class="challenge-meta">
+                        <div class="time-estimate">⏱️ ~10 minutes</div>
+                    </div>
+                </div>
+                 </a>
+
+                <!-- Challenge 3 -->
+                 <a href="/challenge/3">
+                    <div class="challenge-card hard" data-difficulty="hard">
+                        <div class="challenge-header">
+                            <div class="difficulty-badge hard">🔴 Hard</div>
+                            <div class="points-value">+50 pts</div>
+                        </div>
+                        <div class="challenge-title">Integration</div>
+                        <div class="challenge-description">
+                            Master complex integration techniques and apply them to solve challenging mathematical problems.
+                        </div>
+                        <div class="challenge-meta">
+                        <div class="time-estimate">⏱️ ~15 minutes</div>
+                        </div>
+                    </div>
+                 </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-card">
+        <div class="stats-title">🏆 Overall Stats</div>
+        <div class="stat-item">
+            <div class="stat-label">Total Score</div>
+            <div class="stat-value">{{ data[0]["score"] }}</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">Problems Solved</div>
+            <div class="stat-value">{{ data[0]["solved"] }}</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">Accuracy</div>
+            <div class="stat-value">{{ data[0]["accuracy"] }}%</div>
+        </div>
+    </div>
+
 {% endblock %}

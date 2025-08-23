@@ -37,10 +37,12 @@ def homepage():
         session.clear()
         return redirect("/")
     
-    rows = db.execute("SELECT username FROM users WHERE user_id = ?", session["user_id"])
-    username = rows[0]["username"] if rows else None
+    data = db.execute("SELECT * FROM users WHERE user_id = ?", session["user_id"])
+    username = data[0]["username"] if data else None
+    solved = data[0]["solved"] if data else 0
+    accuracy = data[0]["accuracy"] if data else 0
 
-    return render_template("auth/homepage.html", username=username)
+    return render_template("auth/homepage.html", data=data)
 
 @app.route("/")
 def index():
@@ -61,6 +63,9 @@ def leaderboard_api():
 
 @app.route("/leaderboard")
 def leaderboard():
+    if session.get("user_id"):
+        return render_template("auth/leaderboard.html", title="DailyMaths.ie - Leaderboard")
+
     return render_template("dashboard/leaderboard.html", title="DailyMaths.ie - Leaderboard") 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -102,6 +107,11 @@ def login():
     
     # GET request
     return render_template("dashboard/login.html", title="DailyMaths.ie - Login", errors=[])
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
 @nocache
