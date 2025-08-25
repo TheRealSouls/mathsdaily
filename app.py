@@ -30,19 +30,35 @@ def nocache(view):
 def contact():
     return render_template("dashboard/contact.html", title="DailyMaths.ie - Contact")
 
-@app.route("/homepage")
-def homepage():
-    # TODO: Finish
+@app.route("/challenge/<int:challenge_id>")
+def challenge(challenge_id):
+
     if session.get("user_id") is None:
         session.clear()
         return redirect("/")
+
+    problem = db.execute("SELECT * FROM math_problems WHERE problem_id = ?", challenge_id)
+    # WHERE date_added = ?, but for now I'm just testing
+
+    if not problem:
+        return "No challenge added today", 404
+
+    return render_template("auth/challenge.html", challenge=problem[0])
+
+@app.route("/homepage")
+def homepage():
+    if session.get("user_id") is None:
+        session.clear()
+        return redirect("/")
+    
+    challenges = db.execute("SELECT * FROM math_problems")
     
     data = db.execute("SELECT * FROM users WHERE user_id = ?", session["user_id"])
     username = data[0]["username"] if data else None
     solved = data[0]["solved"] if data else 0
     accuracy = data[0]["accuracy"] if data else 0
 
-    return render_template("auth/homepage.html", data=data)
+    return render_template("auth/homepage.html", data=data, challenges=challenges)
 
 @app.route("/")
 def index():

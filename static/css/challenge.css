@@ -1,0 +1,61 @@
+.challenge-container {
+    background: #2d2d2d;
+    border: 1px solid #404040;
+    border-radius: 12px;
+    padding: 3rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    animation: slideInUp 0.8s ease 0.5s forwards;
+}
+
+.challenge-options input[type="radio"] {
+    display: none;
+}
+
+.challenge-options label {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0.2em;
+    border: 2px solid var(--light-grey);
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.challenge-options label span {
+    pointer-events: none;
+}
+
+.challenge-options label:has(input[type="radio"]:checked) {
+    background: var(--red);
+    color: white;
+    border-color: var(--dark-red);
+}
+
+.option-text {
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.option-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--red), #b02a37);
+    color: var(--white);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+ 
+#challenge-content {
+    font-size: 1.3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--black);
+    border-radius: 4px;
+}

@@ -28,8 +28,11 @@ body {
     --red-2: #dc3545;
     --white: #FFF;
     --light-grey: #e0e0e0;
+    --trivial: #725483;
     --easy: #28a745;
     --medium: #ffc107;
+    --hard: #dc3545;
+    --extreme: darkred;
 }
 
 @media (prefers-reduced-motion: no-preference) {

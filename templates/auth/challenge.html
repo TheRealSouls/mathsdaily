@@ -1,0 +1,53 @@
+{% extends "layouts/auth_layout.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="../../static/css/homepage.css">
+    <link rel="stylesheet" href="../../static/css/challenge.css">
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <h1 id="challenge-title">{{ challenge.full_name }}</h1>
+    <div class="tags-container">
+        <p class="tag {{ challenge.difficulty }}">{{ challenge.difficulty.capitalize() }}</p>
+        <p class="tag {{ challenge.duration }}">{{ challenge.duration.capitalize() }}</p>
+    </div>
+
+    <div class="challenge-container">
+        <p id="challenge-content">
+            {{ challenge.content | safe }}
+        </p>
+        
+        <h2>Select the correct answer:</h2>
+        <form class="challenge-options">
+            {% for i in range(1, 11) %}
+            {% set opt = challenge['option' ~ i] %}
+            {% if opt %}
+            <label>
+                <input type="radio" name="answers" value="{{ i }}">
+                <span class="option-text"><span class="option-icon">{{ i }}:</span> {{ opt | safe }}</span>
+            </label><br>
+            {% endif %}
+            {% endfor %}
+            <button class="cta-button">Submit</button>
+        </form>
+        
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        })
+    </script>
+{% endblock %}
