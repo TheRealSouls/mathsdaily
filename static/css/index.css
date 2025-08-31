@@ -1,6 +1,7 @@
 /* Hero section */
 
 #hero {
+    margin-top: 2rem;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,7 +14,7 @@
 }
 
 #hero h1 {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 #hero p {

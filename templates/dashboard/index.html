@@ -14,17 +14,47 @@
             <h1>For free.</h1>
             <p>Based on the <b>Leaving Certificate Maths curriculum</b>, you will be offered a problem to solve for each day of the year. From algebra to geometry, each problem is different and requires a different solution today than the one yesterday.</p>
             <a href="/register" class="cta-button">Start Your Journey</a>
+            <a href="/register" class="cta-button">View GitHub Repository</a>
         </div>
     </div>
 
-    <aside>
-        <span>
-            <h1>We are open source!</h1>
-            <p>DailyMATHS.ie is proudly open source. You are free to contribute, give ideas and view the source code on GitHub!</p>
-            <a href="https://github.com/TheRealSouls/mathsdaily" target="_blank" rel="noopener noreferrer" class="cta-button-2">View repository</a>
-        </span>
-        <img src="../static/images/github-logo.png" width="250" alt="GitHub logo">
-    </aside>
+    <!--
+    {% for challenge in challenges %}
+                <a href="/challenge/{{ challenge.problem_id }}" data-difficulty="{{ challenge.difficulty }}">
+                <div class="challenge-card {{ challenge.difficulty }}" data-difficulty="{{ challenge.difficulty }}">
+                    <div class="challenge-header">
+                        <div class="difficulty-badge {{ challenge.difficulty }}">
+                            {% if challenge.difficulty == "trivial" %}⚪ Trivial
+                            {% elif challenge.difficulty == "easy" %}🟢 Easy
+                            {% elif challenge.difficulty == "medium" %}🟡 Medium
+                            {% elif challenge.difficulty == "hard" %}🔴 Hard
+                            {% elif challenge.difficulty == "extreme" %}⚫ Extreme
+                            {% endif %}
+                        </div>
+                        <div class="points-value">+{{ challenge.points }} pts</div>
+                    </div>
+
+                    <div class="challenge-title">{{ challenge.full_name }}</div>
+                    <div class="challenge-description">
+                        {{ challenge.content[:120] }}{% if challenge.content|length > 120 %}...{% endif %}
+                    </div>
+                    <div class="challenge-meta">
+                        <div class="time-estimate">⏱️ ~{{ challenge.duration }}</div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}-->
+
+    <section class="challenge-preview">
+        <div class="container">
+            <h2 class="section-title fade-in">Today's Challenge</h2>
+            <div class="challenge-card fade-in">
+                <h3>Quadratic Optimisation</h3>
+                <p></p>
+                <div class="difficulty-badge">Easy</div>
+            </div>
+        </div>
+    </section>
 
     <div id="features-grid">
         <h1>How DailyMATHS.ie works</h1>

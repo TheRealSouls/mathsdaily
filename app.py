@@ -36,14 +36,27 @@ def challenge(challenge_id):
     if session.get("user_id") is None:
         session.clear()
         return redirect("/")
+    
+    submission = True
+    
+    solved = db.execute(
+        "SELECT * FROM solved_problems WHERE user_id = ? AND problem_id = ?",
+        session["user_id"], challenge_id
+    )
+
+    if solved:
+        submission = False
 
     problem = db.execute("SELECT * FROM math_problems WHERE problem_id = ?", challenge_id)
-    # WHERE date_added = ?, but for now I'm just testing
+    # TODO: WHERE date_added = ?, but for now I'm just testing
 
     if not problem:
         return "No challenge added today", 404
 
-    return render_template("auth/challenge.html", challenge=problem[0])
+    return render_template("auth/challenge.html", 
+                           challenge=problem[0],
+                           submission=submission
+                           )
 
 @app.route("/homepage")
 def homepage():
@@ -52,19 +65,31 @@ def homepage():
         return redirect("/")
     
     challenges = db.execute("SELECT * FROM math_problems")
+    # TODO: adjust query for only TODAY.
     
     data = db.execute("SELECT * FROM users WHERE user_id = ?", session["user_id"])
     username = data[0]["username"] if data else None
     solved = data[0]["solved"] if data else 0
     accuracy = data[0]["accuracy"] if data else 0
 
-    return render_template("auth/homepage.html", data=data, challenges=challenges)
+    messages = get_flashed_messages(with_categories=True)
+
+    return render_template("auth/homepage.html",
+                            data=data, 
+                            challenges=challenges,
+                            messages=messages
+                        )
 
 @app.route("/")
 def index():
     if session.get("user_id"):
         return redirect("/homepage")
-    return render_template("dashboard/index.html")
+
+    challenge = db.execute("SELECT * FROM math_problems")
+    return render_template(
+        "dashboard/index.html",
+        challenge=challenge
+        )
 
 @app.route("/api/leaderboard")
 def leaderboard_api():
@@ -88,7 +113,8 @@ def leaderboard():
 @nocache
 def login():
 
-    session.clear()
+    if session.get("user_id"):
+        return redirect("/homepage")
 
     if request.method == "POST":
         username_email = request.form.get("username-email")
@@ -133,6 +159,10 @@ def logout():
 @nocache
 def register():
     if request.method == "POST":
+
+        if session.get("user_id"):
+            return redirect("/homepage")
+
         username = request.form.get("username")
         email = request.form.get("email")
         password = request.form.get("password")
@@ -186,3 +216,66 @@ def register():
 
     # GET request
     return render_template("dashboard/register.html", title="DailyMaths.ie - Register")
+
+@app.route("/submit/<int:challenge_id>", methods=["POST"])
+def submit_challenge(challenge_id):
+    if session.get("user_id") is None:
+        flash("⚠️ Please log in first to attempt the challenge.", "error")
+        return redirect("/login")
+    
+    user_id = session["user_id"]
+    option = request.form.get("answer")
+
+    solved = db.execute(
+        "SELECT * FROM solved_problems WHERE user_id = ? AND problem_id = ?",
+        user_id, challenge_id
+    )
+
+    if solved:
+        flash("⚠️ You cannot submit a challenge twice. Nice try!", "error")
+        return redirect("/homepage")
+
+    if not option or not option.isdigit():
+        flash("⚠️ Invalid answer submission.", "error")
+        return redirect(f"/challenge/{challenge_id}")
+    
+    option = int(option)
+
+    problem = db.execute("SELECT * FROM math_problems WHERE problem_id = ?", challenge_id)
+    if not problem:
+        flash("⚠️ Challenge not found.", "error")
+        return redirect("/homepage")
+    
+    problem = problem[0]
+    correct_option = problem["correct_option"]
+
+    is_correct = 1 if option == correct_option else 0
+
+    db.execute(
+        "INSERT INTO solved_problems (user_id, problem_id, correct) VALUES (?, ?, ?)",
+        user_id, challenge_id, is_correct
+    )
+
+    user = db.execute("SELECT * FROM users WHERE user_id = ?", user_id)[0]
+
+    solved = user["solved"] or 0
+    accuracy = user["accuracy"] or 0.0
+    score = user["score"] or 0
+
+    new_solved = solved + 1
+    new_accuracy = ((accuracy * solved) + is_correct) / new_solved
+    new_score = score + (problem["points"] if is_correct else 0)
+
+    db.execute(
+        "UPDATE users SET solved = ?, accuracy = ?, score = ? WHERE user_id = ?",
+        new_solved, new_accuracy, new_score, user_id
+    )
+
+    if is_correct:
+        flash("✅ Correct! Well done.", "success")
+    else:
+        flash("❌ Incorrect. Try again tomorrow!", "error")
+    
+    return redirect("/homepage")
+
+    

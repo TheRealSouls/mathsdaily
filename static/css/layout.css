@@ -10,6 +10,12 @@
     list-style: none;
 }
 
+@media only screen and (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
 html {
     overflow-x: hidden;
 }
@@ -28,11 +34,11 @@ body {
     --red-2: #dc3545;
     --white: #FFF;
     --light-grey: #e0e0e0;
-    --trivial: #725483;
+    --trivial: teal;
     --easy: #28a745;
     --medium: #ffc107;
     --hard: #dc3545;
-    --extreme: darkred;
+    --extreme: #8b0000;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -190,7 +196,7 @@ textarea {
 }
 
 .cta-button {
-    display: inline-block;
+    display: block;
     padding: 1rem 2.5rem;
     background: linear-gradient(45deg, #dc3545, #b02a37);
     border-radius: 1rem;
@@ -199,8 +205,9 @@ textarea {
     box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
     transition: all 0.3s ease;
     text-align: center;
-    margin-top: 1rem;
+    margin: 1rem auto 0 auto;
     border: none;
+    max-width: 300px;
 }
 
 .cta-button:hover {

@@ -10,6 +10,14 @@
     <!-- TODO: Accessibility, ARIA on all websites.-->
     <!-- TODO: Add responsivity with the cards-->
 
+    {% if messages %}
+        <ul class="flash-container">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div id="greeting">
         <h1 id="hello">Hello, {{ data[0]["username"] }}!</h1>
         <h1 class="ready">Ready for today's challenge?</h1>
@@ -65,7 +73,7 @@
         </div>
         <div class="stat-item">
             <div class="stat-label">Accuracy</div>
-            <div class="stat-value">{{ data[0]["accuracy"] }}%</div>
+            <div class="stat-value">{{ "%.2f"|format(data[0]["accuracy"] * 100) }}%</div>
         </div>
     </div>
 

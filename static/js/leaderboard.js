@@ -22,7 +22,7 @@ async function loadLeaderboard(limit) {
                     Solved
                 </p>
                 <p class="user-accuracy">
-                    <span>${player.accuracy ?? 0}%</span>
+                    <span>${((player.accuracy ?? 0) * 100).toFixed(2)}%</span>
                     Accuracy
                 </p>
             </div>
