@@ -1,5 +1,5 @@
 # DailyMATHS.ie
-#### Video Demo:  <URL HERE>
+#### Video Demo: https://www.youtube.com/watch?v=Z28ge93E8m8
 #### Description:
 
 ##### DailyMATHS.ie is, at its core, a website offering daily maths challenges. These are based on the Leaving Certificate curriculum, which is the traditional one in the Irish education system. However, people from many countries can still participate in its challenges. I created the website out of my passion for mathematics and particularly mathematics education. I believe that everyone can intrinsically love math.
