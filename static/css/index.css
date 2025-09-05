@@ -11,6 +11,7 @@
     position: relative;
     z-index: 10;
     font-size: 1.5rem;
+    animation: slideInUp 0.8s ease 0s forwards;
 }
 
 #hero h1 {
@@ -67,41 +68,46 @@
     }
 }
 
-/* Aside */
+/* Preview challenge */
 
-aside {
-    display: flex;
-    background-color: #B90E0A;
-    justify-content: space-around;
-    align-items: center;
-    padding: 3rem;
-    font-size: 1.1rem;
-    margin: 1rem 0;
+.section-title {
+    font-size: 2rem;
+}
+
+.challenge-preview {
+    padding: 5rem 2rem;
+    margin-top: 5rem;
+    background: linear-gradient(135deg, #2d1b1b 0%, #1a1a1a 100%);
+}
+
+.challenge-card {
+    background: rgba(220, 53, 69, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
     text-align: center;
-     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(220, 53, 69, 0.2);
 }
 
-aside span {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin: 0 15%;
+.challenge-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
 }
 
-aside p {
+.challenge-card p {
     line-height: 2rem;
 }
 
-.cta-button-2 {
-    width: 75%;
-    margin: 0 auto;
-    text-align: center;
-    background-color: var(--grey);
-}
-
-aside img {
-    border-radius: 50%;
-    position: relative;
+.difficulty-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(220, 53, 69, 0.2);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    border: 1px solid rgba(220, 53, 69, 0.3);
 }
 
 /* Features section */
@@ -150,10 +156,39 @@ aside img {
     gap: 2rem;
 }
 
-/* TODO: mediaqueries and responsivity */
+/* media queries and animations */
 
 @media only screen and (max-width: 768px) {
-    #footer-nav {
-        flex-direction: row;
+    #hero-content h1 {
+        font-size: 3rem;
     }
+    #hero p {
+        margin: 0 10%;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-up {
+  animation: slideInUp 0.8s ease-out both;
 }

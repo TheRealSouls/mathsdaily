@@ -21,3 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     createMathSymbols();
 });
+
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("animate-up");
+            obs.unobserver(entry.target);
+        }
+    })
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".scroll-animate").forEach(el => {
+    observer.observe(el);
+})

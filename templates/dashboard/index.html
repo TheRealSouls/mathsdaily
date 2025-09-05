@@ -2,6 +2,16 @@
 
 {% block styles %}
     <link rel="stylesheet" href="../static/css/index.css">
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -10,11 +20,11 @@
     <div id="hero">
         <div class="math-symbols" id="mathSymbols"></div>
         <div id="hero-content">
-            <h1>Create a habit out of maths.</h1>
+            <h1>A habit out of maths.</h1>
             <h1>For free.</h1>
             <p>Based on the <b>Leaving Certificate Maths curriculum</b>, you will be offered a problem to solve for each day of the year. From algebra to geometry, each problem is different and requires a different solution today than the one yesterday.</p>
             <a href="/register" class="cta-button">Start Your Journey</a>
-            <a href="/register" class="cta-button">View GitHub Repository</a>
+            <a href="https://github.com/TheRealSouls/mathsdaily" class="cta-button">View GitHub Repository</a>
         </div>
     </div>
 
@@ -45,14 +55,29 @@
             </a>
         {% endfor %}-->
 
+    <!-- TODO: Add scroll-animate to random things. That's where you left off.-->
+
     <section class="challenge-preview">
         <div class="container">
             <h2 class="section-title fade-in">Today's Challenge</h2>
+            {% if challenge %}
             <div class="challenge-card fade-in">
-                <h3>Quadratic Optimisation</h3>
-                <p></p>
-                <div class="difficulty-badge">Easy</div>
+                <h3>{{ challenge.problem_id }}. {{ challenge.full_name }}</h3>
+                <p class="content">{{ challenge.content | safe }}</p>
+                <div class="difficulty-badge">
+                    {% if challenge.difficulty == "trivial" %}⚪ Trivial
+                    {% elif challenge.difficulty == "easy" %}🟢 Easy
+                    {% elif challenge.difficulty == "medium" %}🟡 Medium
+                    {% elif challenge.difficulty == "hard" %}🔴 Hard
+                    {% elif challenge.difficulty == "extreme" %}⚫ Extreme
+                    {% endif %}
+                </div>
             </div>
+            {% else %}
+            <div class="challenge-card fade-in">
+                <p>There is no challenge for today just yet.</p>
+            </div>
+            {% endif %}
         </div>
     </section>
 
@@ -64,22 +89,29 @@
 
             <div class="feature-card fade-in">
                 <div class="feature-icon"><i class="fa-solid fa-chart-line fa-4x"></i></div>
-                <h3>Consistency</h1>
+                <h3>Consistency</h3>
                 <p>If you solve one problem a day, you solve 365 per year. This consistency leads to <a href="https://www.researchgate.net/publication/391205475_Small_changes_big_impact_A_mini_review_of_habit_formation_and_behavioral_change_principles" target="_blank" rel="noopener noreferrer" class="slide-link">real results</a>.</p>
             </div>
 
             <div class="feature-card fade-in">
                 <div class="feature-icon"><i class="fa-solid fa-chart-simple fa-4x"></i></div>
-                <h3>Statistics</h1>
+                <h3>Statistics</h3>
                 <p>We have a <a href="/leaderboard" target="_blank" rel="noopener noreferrer" class="slide-link">leaderboard</a> for friendly competition and keep track of how many problems you have solved.</p>
             </div>
             
             <div class="feature-card fade-in">
                 <div class="feature-icon"><i class="fa-solid fa-crown fa-4x"></i></div>
-                <h3>High-Quality</h1>
+                <h3>High-Quality</h3>
                 <p>Our problems and sample solutions are crafted by H1 students. <span class="brackets">(so far it's only me!)</span></p>
             </div>
         </div>
     </div>
     <script src="../static/js/index.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        })
+    </script>
 {% endblock %}

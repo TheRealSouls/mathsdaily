@@ -85,7 +85,8 @@ def index():
     if session.get("user_id"):
         return redirect("/homepage")
 
-    challenge = db.execute("SELECT * FROM math_problems")
+    challenge = db.execute("SELECT * FROM math_problems LIMIT 1")
+    challenge = challenge[0] if challenge else None
     return render_template(
         "dashboard/index.html",
         challenge=challenge
